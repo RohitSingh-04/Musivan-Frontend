@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+::-webkit-scrollbar{
+    display: none;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg); /* Starting point: no rotation */
+  }
+  to {
+    transform: rotate(360deg); /* Ending point: full 360-degree rotation */
+  }
+}
+
+.rotating-image {
+  animation: spin 10s linear infinite; /* Apply the spin animation */
+}
+
+.rotating-image.paused {
+  animation-play-state: paused;
+}

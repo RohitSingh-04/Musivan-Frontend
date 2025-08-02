@@ -14,9 +14,7 @@ const Sidebar = () => {
     const {PlayState, playFrom, setplayFrom, playlistData, setPlaylistData, currentPlaying, setcurrentPlaying, loadPlaylist, setshuffleState, setloopState, shuffleState, loopState, artistSongsData, favData, loadLiked} = useContext(PlayerContext);
     const { BACKEND_URL } = useContext(BackendContext);
     const {axiosInstance} = useContext(AuthContext);
-    const {Liked, LikePlaylist, fetchLiked} = useContext(PlaylistContext);
-
-    const {currentartistFollow, setCurrentArtist, currentArtist} = useContext(ArtistFollowContext);
+    const {Liked, LikePlaylist, loadArtist} = useContext(PlaylistContext);
 
     const [playlists, setPlaylists] = useState([]);
 

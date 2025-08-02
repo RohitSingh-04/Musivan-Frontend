@@ -56,6 +56,11 @@ import details from './details.png'
 
 import favs from './favs.png'
 
+import up from './up.png'
+import down from './down.png'
+
+import timer_icon from './timer.png'
+
 export const assets = {
     bell_icon,
     home_icon,
@@ -82,7 +87,7 @@ export const assets = {
     spotify_logo,
     clock_icon,
     player_icon,
-    default_artist, cross, heart_empty, heart_fill, dark_heart_empty, dark_heart_fill, save_empty, save_fill, details, favs
+    default_artist, cross, heart_empty, heart_fill, dark_heart_empty, dark_heart_fill, save_empty, save_fill, details, favs, up, down, timer_icon
 }
 
 export const albumsData = [

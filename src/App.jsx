@@ -24,7 +24,9 @@ const App = () => {
           element={
             <div className="h-screen bg-black">
               <div className="h-[90%] flex">
+                <div className='hidden lg:flex'>
                 <Sidebar />
+                </div>
                 <Display />
               </div>
               <Player />

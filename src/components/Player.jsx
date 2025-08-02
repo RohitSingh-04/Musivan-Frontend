@@ -4,12 +4,14 @@ import { PlayerContext } from '../context/PlayerContext';
 import { AuthContext } from '../context/AuthContext';
 import { PlaylistContext } from '../context/PlaylistContext';
 import PopUp from './PopUp';
+import { useNavigate } from 'react-router-dom';
 
 const Player = () => {
     const [showModal, setShowModal] = useState(false);
 
     const {track, seekBar, seekBg, playStatus, play, pause, time, next, previous, seekSong, isFav, like_song } = useContext(PlayerContext);
     const {user} = useContext(AuthContext);
+    const navigate = useNavigate();
   return (<>
     <div className='h-[10%] bg-blacl flex justify-between items-center text-white px-4'>
         <div className='hidden lg:flex items-center gap-4'>
@@ -23,6 +25,8 @@ const Player = () => {
 
             <div className='flex gap-4'>
                 
+                <img className='w-4 cursor-pointer lg:hidden' src={ assets.up } onClick={()=>{navigate('/sidebar')}} title="Sidebar"/>
+
                 <img className='w-4 cursor-pointer' src={ (user)? (isFav)?assets.heart_fill:assets.heart_empty :assets.heart_empty } onClick={like_song} title="Like"/>
 
                 <img className='w-4 cursor-pointer'  onClick={previous} src={assets.prev_icon} alt="" />
@@ -36,6 +40,8 @@ const Player = () => {
                 <img className='w-4 cursor-pointer' onClick={next} src={assets.next_icon} alt="" />
                 
                 <img className='w-4 cursor-pointer' src={assets.plus_icon} title='add to playlist' onClick={() => setShowModal(true)}/>
+
+                <img className='w-4 cursor-pointer' src={assets.timer_icon} title='Sleep Timer' onClick={() => null}/>
                 
             </div>
             <div className='flex items-center gap-5'>

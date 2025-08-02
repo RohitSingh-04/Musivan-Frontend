@@ -2,13 +2,13 @@ import React, { useEffect, useRef } from 'react'
 import DisplayHome from './DisplayHome'
 import { Routes, Route, useLocation } from 'react-router-dom';
 import DisplayAlbum from './DisplayAlbum';
-import { albumsData } from '../assets/assets';
 import DisplayPlayer from './DisplayPlayer';
 import DisplayArtist from './DisplayArtist';
 import DisplayUser from './DisplayUser';
 import DisplayLikedSongs from './DisplayLikedSongs';
 import DisplayLikedPlaylists from './DisplayLikedPlaylists';
 import DisplaySearch from './DisplaySearch';
+import DisplaySidebar from './DisplaySidebar';
 const Display = () => {
 
   const displayRef = useRef();
@@ -38,6 +38,7 @@ const Display = () => {
             <Route path="/liked-songs" element={<DisplayLikedSongs/>}/>
             <Route path="/liked-playlist" element={<DisplayLikedPlaylists/>}/>
             <Route path="/search" element={<DisplaySearch/>}/>
+            <Route path="/sidebar" element={<DisplaySidebar/>}/>
 
         </Routes> 
 

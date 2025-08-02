@@ -8,7 +8,7 @@ const SidebarListTop = ({ListHeading, ListIcon, likes, Followers, onClick = null
   return (
     <>
                     <div className='flex flex-row items-center w-full justify-between'>
-                        <img onClick={onClick} className='rounded sm:w-[50px] mr-5' src={ListIcon} alt="" />
+                        <img onClick={onClick} className='rounded w-[50px] mr-5' src={ListIcon} alt="" />
                         <div className='w-full flex flex-row items-center justify-around'>
                         <h1 onClick={onClick}>{ListHeading}</h1>
                         <div className='flex flex-row items-center justify-around'>

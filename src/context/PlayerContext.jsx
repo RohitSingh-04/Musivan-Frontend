@@ -34,6 +34,11 @@ const PlayerContextProvider = (props) => {
   const [playlistData, setPlaylistData] = useState(null);
   const [currentPlaying, setcurrentPlaying] = useState(0);
 
+  const [TimeoutInstance, setTimeoutInstance] = useState(null);
+  const [TimerTime, setTimerTime] = useState(null);
+
+  const [Volume, setVolume] = useState(1);
+
   const randomSong = async()=>{
         const response = await axiosInstance.get(`${BACKEND_URL}/api/next/`);
         return response.data;
@@ -55,11 +60,35 @@ const PlayerContextProvider = (props) => {
   const play = () => {
     audioRef.current.play();
     setPlayStatus(true);
+    //fade in logic
+    if (audioRef.current.volume < Volume){
+      try{
+        audioRef.current.volume += 0.1;
+        play();
+      }
+      catch (IndexSizeError){
+        audioRef.current.volume = 1;
+      }
+    }
   };
 
   const pause = () => {
-    audioRef.current.pause();
     setPlayStatus(false);
+    if (audioRef.current.volume <= 0){
+      audioRef.current.pause();
+    return ;
+  }
+  //fade out logic
+    setTimeout(()=>{
+      try{
+        audioRef.current.volume -= 0.2; 
+        pause();
+      }
+      catch(IndexSizeError){
+        audioRef.current.volume = 0;
+        pause();
+      }
+    }, 50);
   };
 
   const loadPlaylist = async (albumsData, played_from = 0) => {
@@ -313,7 +342,7 @@ const PlayerContextProvider = (props) => {
     pause,
     loadSong, // Add loadSong to context
     seekSong,
-    next, previous, getSong, loadPlaylist, PlayState, playFrom, setplayFrom, playlistData, setPlaylistData, currentPlaying, setcurrentPlaying, endNext, setshuffleState, setloopState, shuffleState, loopState, loadArtist, artistSongsData, setArtistSongsData, isFav, like_song, loadLiked, favData
+    next, previous, getSong, loadPlaylist, PlayState, playFrom, setplayFrom, playlistData, setPlaylistData, currentPlaying, setcurrentPlaying, endNext, setshuffleState, setloopState, shuffleState, loopState, loadArtist, artistSongsData, setArtistSongsData, isFav, like_song, loadLiked, favData, TimeoutInstance, setTimeoutInstance, TimerTime, setTimerTime
   };
 
   return (

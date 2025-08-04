@@ -11,10 +11,10 @@ import { ArtistFollowContext } from '../context/ArtistFollowContext'
 
 
 const Sidebar = () => {
-    const {PlayState, playFrom, setplayFrom, playlistData, setPlaylistData, currentPlaying, setcurrentPlaying, loadPlaylist, setshuffleState, setloopState, shuffleState, loopState, artistSongsData, favData, loadLiked} = useContext(PlayerContext);
+    const {PlayState, playFrom, setplayFrom, playlistData, setPlaylistData, currentPlaying, setcurrentPlaying, loadPlaylist, setshuffleState, setloopState, shuffleState, loopState, artistSongsData, favData, loadLiked, loadArtist} = useContext(PlayerContext);
     const { BACKEND_URL } = useContext(BackendContext);
     const {axiosInstance} = useContext(AuthContext);
-    const {Liked, LikePlaylist, loadArtist} = useContext(PlaylistContext);
+    const {Liked, LikePlaylist} = useContext(PlaylistContext);
 
     const [playlists, setPlaylists] = useState([]);
 
@@ -114,7 +114,7 @@ const navigate = useNavigate();
                     <div className='cursor-pointer flex-grow overflow-y-auto'>
                         {
                             artistSongsData?.songs?.map((item, index)=>(
-                                <div onClick={()=>{loadArtist(playlistData, index)}} className='flex flex-row items-center w-full hover:bg-[#121212]' key={index}>
+                                <div onClick={()=>{loadArtist(artistSongsData, index)}} className='flex flex-row items-center w-full hover:bg-[#121212]' key={index}>
                                     <img className='w-[60px] p-3 rounded' src={item.imageurl} alt="" />
                                     <h6 dangerouslySetInnerHTML={{ __html: item.name }}></h6>
                                 </div>

@@ -5,9 +5,11 @@ import { AuthContext } from '../context/AuthContext';
 import { PlaylistContext } from '../context/PlaylistContext';
 import PopUp from './PopUp';
 import { useNavigate } from 'react-router-dom';
+import SleepTimer from './SleepTimer';
 
 const Player = () => {
     const [showModal, setShowModal] = useState(false);
+    const [showTimer, setShowTimer] = useState(false);
 
     const {track, seekBar, seekBg, playStatus, play, pause, time, next, previous, seekSong, isFav, like_song } = useContext(PlayerContext);
     const {user} = useContext(AuthContext);
@@ -41,7 +43,7 @@ const Player = () => {
                 
                 <img className='w-4 cursor-pointer' src={assets.plus_icon} title='add to playlist' onClick={() => setShowModal(true)}/>
 
-                <img className='w-4 cursor-pointer' src={assets.timer_icon} title='Sleep Timer' onClick={() => null}/>
+                <img className='w-4 cursor-pointer' src={assets.timer_icon} title='Sleep Timer' onClick={() => setShowTimer(true)}/>
                 
             </div>
             <div className='flex items-center gap-5'>
@@ -67,6 +69,7 @@ const Player = () => {
 
     </div>
     {showModal && <PopUp onClose={() => setShowModal(false)} />}
+        {showTimer && <SleepTimer onClose={()=>setShowTimer(false)}/>}
                 </>
   )
 }

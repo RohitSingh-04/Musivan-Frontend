@@ -4,7 +4,7 @@ import { PlayerContext } from '../context/PlayerContext';
 
 const SidebarListTop = ({ListHeading, ListIcon, likes, Followers, onClick = null} ) => {
 
-    const {setshuffleState, setloopState, setplayFrom, PlayState, shuffleState, loopState} = useContext(PlayerContext);
+    const {setshuffleState, setloopState, setplayFrom, PlayState, shuffleState, loopState, setPlaylistData} = useContext(PlayerContext);
   return (
     <>
                     <div className='flex flex-row items-center w-full justify-between'>

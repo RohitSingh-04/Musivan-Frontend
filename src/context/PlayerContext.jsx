@@ -13,6 +13,8 @@ const PlayerContextProvider = (props) => {
   const audioRef = useRef();
   const seekBg = useRef();
   const seekBar = useRef();
+  const VolumeSeekBg = useRef();
+  const VolumeSeekBar = useRef();
 
   const [isFav, setisFav] = useState(false);
   const [favData, setfavData]= useState([]);
@@ -322,6 +324,15 @@ const PlayerContextProvider = (props) => {
     }
   };
 
+  
+  const changeVolume = (event) =>{
+    if (audioRef.current && VolumeSeekBg.current){
+      const newVolume = (event.nativeEvent.offsetX / VolumeSeekBg.current.offsetWidth);
+      audioRef.current.volume = newVolume;
+      VolumeSeekBar.current.style.width = event.nativeEvent.offsetX+"px";
+    }
+  }
+
   const like_song = async (e) => {
      const response = await axiosInstance.post(`${BACKEND_URL}/api/favs/${track.id}`);
      setisFav(response.data.fav);
@@ -342,7 +353,7 @@ const PlayerContextProvider = (props) => {
     pause,
     loadSong, // Add loadSong to context
     seekSong,
-    next, previous, getSong, loadPlaylist, PlayState, playFrom, setplayFrom, playlistData, setPlaylistData, currentPlaying, setcurrentPlaying, endNext, setshuffleState, setloopState, shuffleState, loopState, loadArtist, artistSongsData, setArtistSongsData, isFav, like_song, loadLiked, favData, TimeoutInstance, setTimeoutInstance, TimerTime, setTimerTime
+    next, previous, getSong, loadPlaylist, PlayState, playFrom, setplayFrom, playlistData, setPlaylistData, currentPlaying, setcurrentPlaying, endNext, setshuffleState, setloopState, shuffleState, loopState, loadArtist, artistSongsData, setArtistSongsData, isFav, like_song, loadLiked, favData, TimeoutInstance, setTimeoutInstance, TimerTime, setTimerTime, VolumeSeekBar, VolumeSeekBg, changeVolume
   };
 
   return (

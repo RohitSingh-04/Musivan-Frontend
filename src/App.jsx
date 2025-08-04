@@ -1,41 +1,52 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Sidebar from './components/Sidebar'
 import Player from './components/Player'
 import Display from './components/Display'
 import { PlayerContext } from './context/PlayerContext'
 import Login from './components/Login'
 import Logout from './components/Logout'
-
 import { Routes, Route } from 'react-router-dom'
 
 const App = () => {
   const { audioRef, track, endNext } = useContext(PlayerContext);
 
+  // Set the real visible height on mobile devices
+  useEffect(() => {
+    const setAppHeight = () => {
+      const appHeight = window.innerHeight;
+      document.documentElement.style.setProperty('--app-height', `${appHeight}px`);
+    };
+
+    setAppHeight();
+    window.addEventListener('resize', setAppHeight);
+    return () => window.removeEventListener('resize', setAppHeight);
+  }, []);
+
   return (
-      <Routes>
+    <Routes>
 
-        {/* Public Login Page */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/logout" element={<Logout />}/>
+      {/* Public Login Page */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/logout" element={<Logout />} />
 
-        {/* Main App Layout */}
-        <Route
-          path="/*"
-          element={
-            <div className="h-screen bg-black">
-              <div className="h-[90%] flex">
-                <div className='hidden lg:flex'>
+      {/* Main App Layout */}
+      <Route
+        path="/*"
+        element={
+          <div className="bg-black" style={{ height: 'var(--app-height)' }}>
+            <div className="h-[90%] flex">
+              <div className='hidden lg:flex'>
                 <Sidebar />
-                </div>
-                <Display />
               </div>
-              <Player />
-              <audio ref={audioRef} src={track.url} preload='auto' onEnded={endNext}></audio>
+              <Display />
             </div>
-          }
-        />
+            <Player />
+            <audio ref={audioRef} src={track.url} preload='auto' onEnded={endNext}></audio>
+          </div>
+        }
+      />
 
-      </Routes>
+    </Routes>
   )
 }
 

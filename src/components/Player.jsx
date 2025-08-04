@@ -11,7 +11,7 @@ const Player = () => {
     const [showModal, setShowModal] = useState(false);
     const [showTimer, setShowTimer] = useState(false);
 
-    const {track, seekBar, seekBg, playStatus, play, pause, time, next, previous, seekSong, isFav, like_song } = useContext(PlayerContext);
+    const {track, seekBar, seekBg, playStatus, play, pause, time, next, previous, seekSong, isFav, like_song, VolumeSeekBar, VolumeSeekBg, changeVolume } = useContext(PlayerContext);
     const {user} = useContext(AuthContext);
     const navigate = useNavigate();
   return (<>
@@ -60,8 +60,8 @@ const Player = () => {
                 
                 <img className="w-4" src={assets.volume_icon} alt="" />
 
-                <div className='w-20 bg-slate-50 h-1 rounded'>
-
+                <div className='w-20 bg-slate-50 h-1 rounded cursor-pointer' ref={VolumeSeekBg} onClick={changeVolume}>
+                    <hr ref = {VolumeSeekBar} className='h-1 border-none w-full bg-green-800 rounded-full'/>
                 </div>
 
                 <img className="w-4" src={assets.zoom_icon} alt="" />

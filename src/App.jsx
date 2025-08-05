@@ -6,6 +6,7 @@ import { PlayerContext } from './context/PlayerContext'
 import Login from './components/Login'
 import Logout from './components/Logout'
 import { Routes, Route } from 'react-router-dom'
+import Register from './components/Register'
 
 const App = () => {
   const { audioRef, track, endNext } = useContext(PlayerContext);
@@ -28,6 +29,7 @@ const App = () => {
       {/* Public Login Page */}
       <Route path="/login" element={<Login />} />
       <Route path="/logout" element={<Logout />} />
+      <Route path="/register" element={<Register/>}/>
 
       {/* Main App Layout */}
       <Route

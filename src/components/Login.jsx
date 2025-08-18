@@ -27,6 +27,7 @@ const Login = () => {
         <input type="text" placeholder='username' className='border-green-700 border m-2 p-2 rounded-2xl text-white' onChange={(e)=>{setUsername(e.target.value)}}/>
         <input type="password" placeholder='password' id="passwd" className='border-green-700 border m-2 p-2 rounded-2xl text-white' onChange={(e)=>{setPassword(e.target.value)}}/>
         <button className='bg-[#00FF00] text-black text-[15px] px-4 py-1 rounded-2xl cursor-pointer w-[10vh]' onClick={login}>Login</button>
+        <div><span className='text-white'>Don't have an account? <button className='cursor-pointer underline' onClick={()=>{navigate("/register")}}>Register Here</button></span></div>
       </div>
     </div>
   )

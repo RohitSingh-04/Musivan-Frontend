@@ -21,7 +21,6 @@ import queue_icon from './queue.png'
 import volume_icon from './volume.png'
 import arrow_right from './right_arrow.png'
 import arrow_left from './left_arrow.png'
-import spotify_logo from './spotify_logo.png'
 import clock_icon from './clock_icon.png'
 import img1 from './img1.jpg'
 import img2 from './img2.jpg'
@@ -60,6 +59,7 @@ import up from './up.png'
 import down from './down.png'
 
 import timer_icon from './timer.png'
+import logo from './logo.png'
 
 export const assets = {
     bell_icon,
@@ -84,10 +84,9 @@ export const assets = {
     pause_icon,
     arrow_left,
     arrow_right,
-    spotify_logo,
     clock_icon,
     player_icon,
-    default_artist, cross, heart_empty, heart_fill, dark_heart_empty, dark_heart_fill, save_empty, save_fill, details, favs, up, down, timer_icon
+    default_artist, cross, heart_empty, heart_fill, dark_heart_empty, dark_heart_fill, save_empty, save_fill, details, favs, up, down, timer_icon, logo
 }
 
 export const albumsData = [

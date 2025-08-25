@@ -13,21 +13,24 @@ import { ArtistFollowContext } from '../context/ArtistFollowContext'
 const Sidebar = () => {
     const {PlayState, playFrom, setplayFrom, playlistData, setPlaylistData, currentPlaying, setcurrentPlaying, loadPlaylist, setshuffleState, setloopState, shuffleState, loopState, artistSongsData, favData, loadLiked, loadArtist} = useContext(PlayerContext);
     const { BACKEND_URL } = useContext(BackendContext);
-    const {axiosInstance} = useContext(AuthContext);
+    const {axiosInstance, user} = useContext(AuthContext);
     const {Liked, LikePlaylist} = useContext(PlaylistContext);
 
     const [playlists, setPlaylists] = useState([]);
 
     const getplaylists = async () => {
-    try {
-      const response = await axiosInstance.get(`${BACKEND_URL}/api/get-users-playlists/`);
-      setPlaylists(response.data);
-    } catch (error){
-        
-        console.error("error: ", error);
+        if(user){
 
-      setPlaylists([]);
-    }
+            try {
+                const response = await axiosInstance.get(`${BACKEND_URL}/api/get-users-playlists/`);
+                setPlaylists(response.data);
+            } catch (error){
+                
+                console.error("error: ", error);
+                
+                setPlaylists([]);
+            }
+        }
   };
 
     useEffect(()=>{

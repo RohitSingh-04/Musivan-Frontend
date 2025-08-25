@@ -9,6 +9,7 @@ import DisplayLikedSongs from './DisplayLikedSongs';
 import DisplayLikedPlaylists from './DisplayLikedPlaylists';
 import DisplaySearch from './DisplaySearch';
 import DisplaySidebar from './DisplaySidebar';
+import AddPlaylist from './AddPlaylist';
 const Display = () => {
 
   const displayRef = useRef();
@@ -39,6 +40,7 @@ const Display = () => {
             <Route path="/liked-playlist" element={<DisplayLikedPlaylists/>}/>
             <Route path="/search" element={<DisplaySearch/>}/>
             <Route path="/sidebar" element={<DisplaySidebar/>}/>
+            <Route path="/addPlaylist" element={<AddPlaylist/>}/>
 
         </Routes> 
 

@@ -1,14 +1,17 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { BackendContext } from "./BackendContext";
 import { AuthContext } from "./AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export const PlayerContext = createContext();
 
 const PlayerContextProvider = (props) => {
+
+  const navigate = useNavigate();
   
   const {BACKEND_URL} = useContext(BackendContext);
   
-  const { axiosInstance } = useContext(AuthContext);
+  const { axiosInstance, user } = useContext(AuthContext);
 
   const audioRef = useRef();
   const seekBg = useRef();
@@ -123,15 +126,17 @@ const PlayerContextProvider = (props) => {
 
   // Function to load a new song
   const loadSong = async (song) => {
+    if (user){
 
-    try{
-      const response = await axiosInstance.get(`${BACKEND_URL}/api/favs/${song.id}`);
-      setisFav(response.data.fav);
-    }
-
-    catch (error){
-      if (error.response && error.response.status === 401){
-        console.error("Authentication Failed try to login again")
+      try{
+        const response = await axiosInstance.get(`${BACKEND_URL}/api/favs/${song.id}`);
+        setisFav(response.data.fav);
+      }
+      
+      catch (error){
+        if (error.response && error.response.status === 401){
+          console.error("Authentication Failed try to login again")
+        }
       }
     }
 
@@ -201,8 +206,6 @@ const PlayerContextProvider = (props) => {
           loadSong(queue[updatedqueuePointer]);
         }
 
-        console.log(queue, queuePointer)
-        
       }
       else if (playFrom === PlayState.Playlist){
         setQueue([]);
@@ -334,8 +337,13 @@ const PlayerContextProvider = (props) => {
   }
 
   const like_song = async (e) => {
-     const response = await axiosInstance.post(`${BACKEND_URL}/api/favs/${track.id}`);
-     setisFav(response.data.fav);
+    if (user){
+      const response = await axiosInstance.post(`${BACKEND_URL}/api/favs/${track.id}`);
+    }
+    else{
+      navigate('/login')
+    }
+    setisFav(response.data.fav);
   }
   
 

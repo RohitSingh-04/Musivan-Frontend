@@ -1,16 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-const PlaylistInfo = ({ Title, SubTitle, playlistURL, playlistName, playlistDesc, global }) => {
+const PlaylistInfo = ({ Title, SubTitle, playlistURL, playlistName, playlistDesc, global, setimageBase64 }) => {
     const inputFile = useRef();
     const [imgSrc, setImgSrc] = useState(null);
 
     const handleFile = (file) => {
         if (file && file.type.startsWith('image/')) {
-            if (imgSrc) {
-                URL.revokeObjectURL(imgSrc);
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = async ()=>{
+                setImgSrc(reader.result);
+                setimageBase64(reader.result);
             }
-            const newImgLink = URL.createObjectURL(file);
-            setImgSrc(newImgLink);
         }
     };
     const uploadImage = () => {
@@ -44,7 +45,7 @@ const PlaylistInfo = ({ Title, SubTitle, playlistURL, playlistName, playlistDesc
             <div className='flex flex-col sm:flex-row sm:content-right items-center'>
                 <div className='flex flex-col'>
                     <label htmlFor="url" className='my-2'>Image URL</label>
-                    <input type="url" id="url" ref={playlistURL} placeholder='https://abc.com/image.png' className='border rounded p-2 mb-4 md:w-70' />
+                    <input type="url" id="url" ref={playlistURL} placeholder='https://abc.com/image.png' className='border rounded p-2 mb-4 md:w-70' disabled = {(imgSrc)?true:false}/>
                 </div>
                 <span className='mx-3'>or</span>
 

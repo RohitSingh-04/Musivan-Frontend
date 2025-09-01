@@ -7,7 +7,6 @@ import { BackendContext } from '../context/BackendContext'
 import SidebarListTop from './SidebarListTop'
 import SidebarListItem from './SidebarListItem'
 import { PlaylistContext } from '../context/PlaylistContext'
-import { ArtistFollowContext } from '../context/ArtistFollowContext'
 
 
 const Sidebar = () => {
@@ -19,18 +18,16 @@ const Sidebar = () => {
     const [playlists, setPlaylists] = useState([]);
 
     const getplaylists = async () => {
-        if(user){
-
             try {
                 const response = await axiosInstance.get(`${BACKEND_URL}/api/get-users-playlists/`);
                 setPlaylists(response.data);
+                
             } catch (error){
                 
                 console.error("error: ", error);
                 
                 setPlaylists([]);
             }
-        }
   };
 
     useEffect(()=>{

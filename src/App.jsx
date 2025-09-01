@@ -9,7 +9,7 @@ import { Routes, Route } from 'react-router-dom'
 import Register from './components/Register'
 
 const App = () => {
-  const { audioRef, track, endNext } = useContext(PlayerContext);
+  const { audioRef, track, endNext, Volume } = useContext(PlayerContext);
 
   // Set the real visible height on mobile devices
   useEffect(() => {
@@ -43,7 +43,7 @@ const App = () => {
               <Display />
             </div>
             <Player />
-            <audio ref={audioRef} src={track.url} preload='auto' onEnded={endNext}></audio>
+            <audio ref={audioRef} src={track.url} preload='auto' onEnded={endNext} onChange={()=>{audioRef.current.volume = Volume}}></audio>
           </div>
         }
       />

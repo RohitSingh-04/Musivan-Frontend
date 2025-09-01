@@ -332,6 +332,7 @@ const PlayerContextProvider = (props) => {
     if (audioRef.current && VolumeSeekBg.current){
       const newVolume = (event.nativeEvent.offsetX / VolumeSeekBg.current.offsetWidth);
       audioRef.current.volume = newVolume;
+      setVolume(newVolume);
       VolumeSeekBar.current.style.width = event.nativeEvent.offsetX+"px";
     }
   }
@@ -361,7 +362,7 @@ const PlayerContextProvider = (props) => {
     pause,
     loadSong, // Add loadSong to context
     seekSong,
-    next, previous, getSong, loadPlaylist, PlayState, playFrom, setplayFrom, playlistData, setPlaylistData, currentPlaying, setcurrentPlaying, endNext, setshuffleState, setloopState, shuffleState, loopState, loadArtist, artistSongsData, setArtistSongsData, isFav, like_song, loadLiked, favData, TimeoutInstance, setTimeoutInstance, TimerTime, setTimerTime, VolumeSeekBar, VolumeSeekBg, changeVolume
+    next, previous, getSong, loadPlaylist, PlayState, playFrom, setplayFrom, playlistData, setPlaylistData, currentPlaying, setcurrentPlaying, endNext, setshuffleState, setloopState, shuffleState, loopState, loadArtist, artistSongsData, setArtistSongsData, isFav, like_song, loadLiked, favData, TimeoutInstance, setTimeoutInstance, TimerTime, setTimerTime, VolumeSeekBar, VolumeSeekBg, changeVolume, Volume
   };
 
   return (

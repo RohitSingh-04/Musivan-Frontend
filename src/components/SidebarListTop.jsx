@@ -11,8 +11,8 @@ const SidebarListTop = ({ListHeading, ListIcon, likes, Followers, onClick = null
                         <img onClick={onClick} className='rounded w-[50px] mr-5' src={ListIcon} alt="" />
                         <div className='w-full flex flex-row items-center justify-around'>
                         <h1 onClick={onClick}>{ListHeading}</h1>
-                        <div className='flex flex-row items-center justify-around'>
-                            <img className='w-4 cursor-pointer mx-3' src={assets.shuffle_icon} alt="shuffle" title='shuffle' onClick={()=>{
+                        <div className='flex flex-col items-center justify-around md:flex-row'>
+                            <img className='w-4 cursor-pointer mx-3 my-1 md:my-0' src={assets.shuffle_icon} alt="shuffle" title='shuffle' onClick={()=>{
                                 setshuffleState(!shuffleState);
                                 (loopState)? setloopState(false): ""
                             }}/>

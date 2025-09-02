@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { AuthContext } from '../context/AuthContext';
 import { PlayerContext } from '../context/PlayerContext';
 import { BackendContext } from '../context/BackendContext';
+import { assets } from '../assets/assets';
 
 const DisplayList = ({loadFx, index, Image, Name, Album, UserId, deleteFx, DeleteBtn = false}) => {
 
@@ -67,8 +68,8 @@ const DisplayList = ({loadFx, index, Image, Name, Album, UserId, deleteFx, Delet
               {
                 (DeleteBtn)
                 ?
-            <button onClick={handleDeleteClick} className='absolute right-2 top-1/2 -translate-y-1/2 bg-red-600 hover:bg-red-700 text-white p-2 rounded-full text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
-                Delete
+            <button onClick={handleDeleteClick} className='absolute right-2 top-1/2 -translate-y-1/2 bg-red-600 hover:bg-red-700 text-white p-2 rounded-full text-xs font-bold lg:opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer sm:opacity-100'>
+                <img src={assets.bin} alt="delete" />
             </button>
                 :
                 ""

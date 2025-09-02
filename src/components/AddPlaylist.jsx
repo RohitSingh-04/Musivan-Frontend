@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import PlaylistInfo from './PlaylistInfo';
 import { AuthContext } from '../context/AuthContext';
@@ -14,6 +14,12 @@ const AddPlaylist = () => {
     const navigate = useNavigate();
     const {axiosInstance, user} = useContext(AuthContext);
     const {BACKEND_URL} = useContext(BackendContext);
+
+    useEffect(()=>{
+      if (!user){
+        navigate("/");
+      }
+    }, []);
 
     const createPlaylist = async()=>{
        try {

@@ -61,7 +61,7 @@ const navigate = useNavigate();
 
                 <div className='flex items-center gap-3'>
                     <img className="w-5" src={assets.arrow_icon} alt="" />
-                    <img className="w-5 cursor-pointer" src={assets.plus_icon} alt="add" title='add playlist' />
+                    <img className="w-5 cursor-pointer" src={assets.plus_icon} alt="add" title='add playlist' onClick={()=>{navigate('/addplaylist')}}/>
                 </div>
             </div>
             
@@ -69,7 +69,7 @@ const navigate = useNavigate();
             <div className='p-4 bg-[#242424] m-2 rounded font-semibold flex flex-col items-start justify-start gap-1 pl-4'>
                 <h1>Create your first playlist</h1>
                 <p className='font-light'>it's easy we will help you </p>
-                <button className='px-4 py-1.5 bg-white text-[15px] text-black rounded-full mt-4'>Create Playlist</button>
+                <button className='px-4 py-1.5 bg-white text-[15px] text-black rounded-full mt-4 cursor-pointer' onClick={()=>{navigate('/addplaylist')}}>Create Playlist</button>
             </div>)
             :(
             <div className='cursor-pointer flex-grow overflow-y-auto'>
@@ -77,7 +77,7 @@ const navigate = useNavigate();
                 
                 playlists.map((item, index)=>(
                     <div className='flex flex-row items-center w-full hover:bg-[#121212]' key={index} onClick={()=>navigate(`/album/${item.id}`)}>
-                                    <img className='w-[60px] p-3 rounded' src={item.image} alt="" />
+                                    <img className='w-[60px] p-3 rounded' src={(item.relative != null)?BACKEND_URL+item.relative:item.image} alt="" />
                                     <p className='font-normal text-sm' dangerouslySetInnerHTML={{ __html: item.name }}></p>
                     </div>
                 ))
@@ -88,7 +88,7 @@ const navigate = useNavigate();
             {(playFrom === PlayState.Playlist)?
             <div className='p-4 bg-[#242424] m-2 rounded font-semibold flex flex-col items-start justify-start gap-1 pl-4 flex flex-col flex-grow overflow-hidden h-[160vh]'>
 
-                <SidebarListTop ListHeading={`Playing - ${playlistData[currentPlaying].name.name}`} ListIcon={playlistData[currentPlaying].name.image} likes = {playlistData[currentPlaying].name.likes}/>
+                <SidebarListTop ListHeading={`Playing - ${playlistData[currentPlaying].name.name}`} ListIcon={(playlistData[currentPlaying].name.relative != null)?BACKEND_URL+playlistData[currentPlaying].name.relative:playlistData[currentPlaying].name.image} likes = {playlistData[currentPlaying].name.likes}/>
                 
                 <div className='cursor-pointer flex-grow overflow-y-auto'>
                     {

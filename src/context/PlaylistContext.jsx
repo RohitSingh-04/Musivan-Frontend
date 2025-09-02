@@ -1,16 +1,19 @@
 import { createContext, useContext, useState } from "react";
 import { AuthContext } from '../context/AuthContext'
 import { BackendContext } from '../context/BackendContext';
+import { useNavigate } from "react-router-dom";
 
 export const PlaylistContext = createContext();
 
 const PlaylistContextProvider = (props) => {
 
     const [Liked, setLiked] = useState(false);
+    const [PlaylistUserId, setPlaylistUserId] = useState(null);
 
     const {BACKEND_URL} = useContext(BackendContext);
     const {axiosInstance} = useContext(AuthContext);
     const [PlaylistView, setPlaylistView] = useState([]);
+    const navigate = useNavigate();
 
     
   const fetchPlaylistSongs = async (id) => {
@@ -52,6 +55,40 @@ const PlaylistContextProvider = (props) => {
 
     }
 
+    const fetchUserId = async (ObjectId)=>{
+      try{
+        const response = await axiosInstance.get(
+            `${BACKEND_URL}/api/playlist-getuser/${ObjectId}`
+        );
+        console.log(response)
+        if (response.data.found){
+          setPlaylistUserId(response.data.userId);
+        }
+        else{
+          throw new Error(response.data.error);
+        }
+        
+        }
+        catch(error){
+        console.error("Error: your are not auth to access this item", error);
+        }
+    }
+
+    const DeletePlaylist = async (ObjectId) => {
+      try{
+        const response = await axiosInstance.delete(
+            `${BACKEND_URL}/api/playlists/${ObjectId}`
+        );
+        if (response.data.removed){
+          navigate("/");
+        }
+        
+        }
+        catch(error){
+        console.error("Error: your are not auth to access this item", error);
+        }
+    }
+
     const fetchLiked = async(id)=>{
         try{
             const LikedResponse = await axiosInstance.get(
@@ -66,7 +103,7 @@ const PlaylistContextProvider = (props) => {
       }
 
   const contextValue = {
-    Liked, setLiked, LikePlaylist, fetchLiked, PlaylistView, setPlaylistView, deletePlaylistSongs, fetchPlaylistSongs}
+    Liked, setLiked, LikePlaylist, fetchLiked, PlaylistView, setPlaylistView, deletePlaylistSongs, fetchPlaylistSongs, DeletePlaylist, fetchUserId, PlaylistUserId}
 
   return (
     <PlaylistContext.Provider value={contextValue}>

@@ -44,7 +44,7 @@ const DisplayLikedPlaylists = () => {
         <hr />
         {
             likedPlaylists.map((item, index)=>(
-              <DisplayList loadFx = {()=>{navigate(`/album/${item.id}`);}} index = {index} Image  = {item.image} UserId = {item.user} Name = {item.name} key = {index} Playlists = {item.length}/>
+              <DisplayList loadFx = {()=>{navigate(`/album/${item.id}`);}} index = {index} Image  = {(item.relative != null)?BACKEND_URL+item.relative:item.image} UserId = {item.user} Name = {item.name} key = {index} Playlists = {item.length}/>
             ))
         }
 

@@ -2,17 +2,18 @@ import React, { useContext, useState, useEffect } from 'react'
 import { assets } from '../assets/assets'
 import { PlaylistContext } from '../context/PlaylistContext';
 import { ArtistFollowContext } from '../context/ArtistFollowContext';
+import { AuthContext } from '../context/AuthContext';
 
 
 const DisplayInfo = ({TopImage, Type, Name, Desc, Likes, ObjectId, Songs = 0, Followers = 0, Playlists = 0}) => {
 
-    const {Liked, LikePlaylist, fetchLiked} = useContext(PlaylistContext);
-    
+    const {Liked, LikePlaylist, fetchLiked, DeletePlaylist, fetchUserId, PlaylistUserId} = useContext(PlaylistContext);
+    const {user} = useContext(AuthContext);
 
     const {isFollowed, Followed, follow, unFollow} = useContext(ArtistFollowContext);
   
     if (Type == "Playlist"){
-        useEffect(()=>{fetchLiked(ObjectId);}, [ObjectId]);
+        useEffect(()=>{fetchLiked(ObjectId); fetchUserId(ObjectId)}, [ObjectId]);
     }
     
     else if(Type == "Artist"){
@@ -41,6 +42,11 @@ const DisplayInfo = ({TopImage, Type, Name, Desc, Likes, ObjectId, Songs = 0, Fo
                         (Type=="Playlist")?
                             <div className='flex flex-row'>
                             <button className='bg-white text-black text-[15px] px-2 py-1 rounded-2xl cursor-pointer w-20 mt-5 mr-3 flex flex-row items-center' onClick={()=>{LikePlaylist(ObjectId)}}> <img src={ (!Liked)?assets.dark_heart_empty: assets.dark_heart_fill} className='h-4 mr-1' alt="Like"/> { (!Liked) ? "Like": "Liked"}</button>
+                            {
+                                (PlaylistUserId === user?.id)?
+                                <button className='bg-white text-black text-[15px] px-2 py-1 rounded-2xl cursor-pointer w-20 mt-5 mr-3 flex flex-row items-center' onClick={()=>{DeletePlaylist(ObjectId)}}> <img src={assets.bin} className='h-4 mr-1' alt="Like"/> Delete</button>
+                                :""
+                            }
                             </div>
                         : ""
                     }

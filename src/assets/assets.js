@@ -60,6 +60,7 @@ import down from './down.png'
 
 import timer_icon from './timer.png'
 import logo from './logo.png'
+import bin from './bin.png'
 
 export const assets = {
     bell_icon,
@@ -86,7 +87,7 @@ export const assets = {
     arrow_right,
     clock_icon,
     player_icon,
-    default_artist, cross, heart_empty, heart_fill, dark_heart_empty, dark_heart_fill, save_empty, save_fill, details, favs, up, down, timer_icon, logo
+    default_artist, cross, heart_empty, heart_fill, dark_heart_empty, dark_heart_fill, save_empty, save_fill, details, favs, up, down, timer_icon, logo, bin
 }
 
 export const albumsData = [
